@@ -2,7 +2,6 @@ package com.hurricane.app.cartoon.filter;
 
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
-import java.util.logging.Logger;
 
 import javax.servlet.Filter;
 import javax.servlet.FilterChain;
@@ -13,9 +12,15 @@ import javax.servlet.ServletResponse;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletRequestWrapper;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import com.hurricane.app.cartoon.controller.FileListController;
+
 
 public class CharsetEncodingFilter implements Filter{
-	private Logger logger = Logger.getLogger(getClass().getName());
+	private static Logger logger = LoggerFactory.getLogger(FileListController.class);
+	
 	public void init(FilterConfig filterconfig) throws ServletException {
 		// TODO Auto-generated method stub
 		

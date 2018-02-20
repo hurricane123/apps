@@ -41,16 +41,21 @@ public class ImageController {
 		File file = new File(filePath);
 		if (file.exists()&&file.isFile()) {
 			InputStream inputStream = new FileInputStream(file);
-			response.setContentType("image/jpeg");
-//			response.setCharacterEncoding("UTF-8");
 			ServletOutputStream outputStream = response.getOutputStream();
 			
-			
+			//这种方式无法显示，不知道为什么
 //			int length = -1;
 //			byte[] buffer = new byte[1024];
 //			while ((length=inputStream.read(buffer, 0, 1024))!=-1) {
-//				buffer = Base64Utils.encode(buffer);
-//				outputStream.write(buffer,0,length);
+//				byte[] buf;
+//				if (length<1024) {
+//					byte[] remain = new byte[length];
+//					System.arraycopy(buffer, 0, remain, 0, length);
+//					buf = Base64Utils.encode(remain);
+//				}else {
+//					buf = Base64Utils.encode(buffer);
+//				}
+//				outputStream.write(buf);
 //			}
 			
 //			BufferedImage image = ImageIO.read(file);
@@ -67,11 +72,54 @@ public class ImageController {
 		}
 //		return null;
 	}
+	
+
+	
+	/**
+	 * 给img控件的src属性直接提供一个url，然后在服务器端直接返回字节流，
+	 * 要比传递给src属性字节流，然后在服务器端对字节流进行Base64编码，还要讲MIME类型的字节码返回的方式方便的多（viewImage方法中）
+	 * 
+	 * @param url
+	 * @param response
+	 * @throws Exception
+	 */
+	@RequestMapping(value="viewDirect")
+	public void viewDirect(@RequestParam String url,HttpServletResponse response) throws Exception {
+		String filePath = baseDir + "/" + url;
+		logger.trace("当前请求的的图片路径为："+filePath);
+		File file = new File(filePath);
+		if (file.exists()&&file.isFile()) {
+			InputStream inputStream = new FileInputStream(file);
+			ServletOutputStream outputStream = response.getOutputStream();
+			//方式一
+			int length = -1;
+			byte[] buffer = new byte[1024];
+			while ((length=inputStream.read(buffer, 0, 1024))!=-1) {
+				outputStream.write(buffer,0,length);
+			}
+			//方式二
+//			BufferedImage image = ImageIO.read(file);
+//			ImageIO.write(image,"JPEG",response.getOutputStream());
+			
+			//方式三
+//			byte[] bytes = new byte[(int) file.length()];
+//			inputStream.read(bytes);
+//		//	outputStream.write(metaType.getBytes());//这一行代码直接影响是否将接下来的字节解析为图片
+////			outputStream.write(Base64Utils.encode(bytes));
+//			outputStream.write(bytes);
+			
+			inputStream.close();
+			outputStream.flush();
+			outputStream.close();
+		}
+	}
+	
 	@RequestMapping("jumpToImgView")
 	public Object jumpToImgView(@RequestParam(defaultValue="") String fileName,Model model) throws Exception {
 		logger.debug("点击的文件："+fileName);
 		model.addAttribute("imgId", fileName);
-		return "image";
+		return "sliderImage";
+//		return "image";
 	}
 	
 	

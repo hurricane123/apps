@@ -49,4 +49,10 @@ public class TestListFile {
 		logger.info("获取到的索引位置为："+fileNameList.get(fileNameList.size()-1));
 		logger.info("获取到的文件总数为："+fileNameList.size()+"");
 	}
+	@Test
+	public void testSubString() {
+		String fileName = "aaa.jpg";
+		logger.info(fileName.indexOf(".")+"");
+		logger.info(fileName.substring(fileName.indexOf("."), fileName.length()));
+	}
 }
