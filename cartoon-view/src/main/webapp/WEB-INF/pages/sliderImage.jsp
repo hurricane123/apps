@@ -76,7 +76,7 @@
 				  if(this.activeIndex==0&&((index-prependNum)>0)){
 					  prependNum++;
 					  mySwiper.prependSlide([
-					        '<div class="swiper-slide"><div class="swiper-zoom-container"><img src="' + '${pageContext.request.contextPath }/image/viewDirect?url='+ imgs[index-prependNum] + '"/></div></div>',
+					        '<div class="swiper-slide"><div class="swiper-zoom-container"><img src="' + '${pageContext.request.contextPath }/image/viewDirect?url='+ encodeURIComponent(imgs[index-prependNum]) + '"/></div></div>',
 					        ]);
 				  }
 				},
@@ -85,7 +85,7 @@
 				  if((this.activeIndex==prependNum+apendNum)&&((index+apendNum+1)<imgs.length)){
 					  apendNum++;
 					  mySwiper.appendSlide([
-					        '<div class="swiper-slide"><div class="swiper-zoom-container"><img src="' + '${pageContext.request.contextPath }/image/viewDirect?url='+ imgs[index+apendNum] + '"/></div></div>',
+					        '<div class="swiper-slide"><div class="swiper-zoom-container"><img src="' + '${pageContext.request.contextPath }/image/viewDirect?url='+ encodeURIComponent(imgs[index+apendNum]) + '"/></div></div>',
 					        ]);
 				  }
 			    },
@@ -101,17 +101,17 @@
 			}, function(data) {
 				index = parseInt(data.pop());
 				imgs = data;
-				$("#img1").attr("src",'${pageContext.request.contextPath }/image/viewDirect?url='+imgs[index]);
+				$("#img1").attr("src",'${pageContext.request.contextPath }/image/viewDirect?url='+encodeURIComponent(imgs[index]));
 				if(index>0){
 					prependNum++;
 					mySwiper.prependSlide([
-				        '<div class="swiper-slide"><div class="swiper-zoom-container"><img src="' + '${pageContext.request.contextPath }/image/viewDirect?url='+ imgs[index-1] + '"/></div></div>',
+				        '<div class="swiper-slide"><div class="swiper-zoom-container"><img src="' + '${pageContext.request.contextPath }/image/viewDirect?url='+ encodeURIComponent(imgs[index-1]) + '"/></div></div>',
 				        ]);
 				}
 				if(index<imgs.length){
 					apendNum++;
 					mySwiper.appendSlide([
-				        '<div class="swiper-slide"><div class="swiper-zoom-container"><img src="' + '${pageContext.request.contextPath }/image/viewDirect?url='+ imgs[index+1] + '"/></div></div>',
+				        '<div class="swiper-slide"><div class="swiper-zoom-container"><img src="' + '${pageContext.request.contextPath }/image/viewDirect?url='+ encodeURIComponent(imgs[index+1]) + '"/></div></div>',
 				        ]);
 				}
 			})

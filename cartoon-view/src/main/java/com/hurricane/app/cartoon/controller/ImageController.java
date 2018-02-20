@@ -137,7 +137,8 @@ public class ImageController {
 			if (file.exists()&&file.isDirectory()) {
 				String[] fileNames = file.list(new FilenameFilter() {
 					public boolean accept(File dir, String name) {
-						if (name.endsWith(".jpg")) {
+						String nameSuffix = name.substring(name.indexOf(".")+1, name.length());
+						if (nameSuffix.equalsIgnoreCase("jpg")||nameSuffix.equalsIgnoreCase("png")) {
 							return true;
 						}
 						return false;
