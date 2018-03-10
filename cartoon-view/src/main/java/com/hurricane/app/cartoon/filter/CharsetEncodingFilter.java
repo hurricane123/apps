@@ -20,10 +20,12 @@ import com.hurricane.app.cartoon.controller.FileListController;
 
 public class CharsetEncodingFilter implements Filter{
 	private static Logger logger = LoggerFactory.getLogger(FileListController.class);
-	
+	private FilterConfig config;
+	private String[] excludeUrls;
 	public void init(FilterConfig filterconfig) throws ServletException {
-		// TODO Auto-generated method stub
-		
+		config = filterconfig;
+		String excludeURL = config.getInitParameter("excludeURL");
+		excludeUrls = excludeURL.split(",");
 	}
 
 	public void doFilter(ServletRequest servletrequest, ServletResponse servletresponse, FilterChain filterchain)
@@ -33,10 +35,21 @@ public class CharsetEncodingFilter implements Filter{
 		servletresponse.setCharacterEncoding("UTF-8");
 		servletresponse.setContentType("text/html;charset=UTF-8");
 		servletrequest.setCharacterEncoding("UTF-8");
-		logger.info("filter---"+((HttpServletRequest)servletrequest).getRequestURI());
+		String url = ((HttpServletRequest)servletrequest).getRequestURI();
+		String contextPath = servletrequest.getServletContext().getContextPath();
+//		String contextPath = config.getServletContext().getContextPath();
+		logger.trace("应用上下文是："+contextPath);
+		logger.trace("filter---"+url);
+		for (String string : excludeUrls) {
+			if ((contextPath+string.trim()).equals(url)) {//请求连接不要求进行乱码处理
+				logger.trace("请求连接{}不要求进行乱码处理",url);
+				filterchain.doFilter(servletrequest, servletresponse);
+				return;
+			}
+		}
 		if (((HttpServletRequest)servletrequest).getMethod().equalsIgnoreCase("post")) {
 			filterchain.doFilter(servletrequest, servletresponse);
-		}else {
+		}else { 
 			filterchain.doFilter(new MyWrapperRequest((HttpServletRequest) servletrequest), servletresponse);
 		}
 	}
@@ -97,5 +110,7 @@ public class CharsetEncodingFilter implements Filter{
 		}
 		
 	}
+	
+	
 
 }

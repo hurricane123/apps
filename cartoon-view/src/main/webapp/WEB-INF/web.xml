@@ -13,8 +13,12 @@
 	<filter>
 		<filter-name>CharsetFilter</filter-name>
 		<filter-class>com.hurricane.app.cartoon.filter.CharsetEncodingFilter</filter-class>
+		<init-param>
+			<param-name>excludeURL</param-name>
+			<param-value>/image/jumpToImgView,/image/viewDirect,/image/getImgs</param-value>
+		</init-param>
 	</filter>
-	
+	 
 	<filter-mapping>
 		<filter-name>CharsetFilter</filter-name>
 		<url-pattern>/*</url-pattern>
