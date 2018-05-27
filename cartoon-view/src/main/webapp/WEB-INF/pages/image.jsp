@@ -6,7 +6,6 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
 <script type="text/javascript" src="${pageContext.request.contextPath }/res/easyui/jquery.min.js"></script>  
-<script type="text/javascript" src="${pageContext.request.contextPath }/res/easyui/jquery.easyui.min.js"></script>  
 <script type="text/javascript" src="${pageContext.request.contextPath }/res/easyui/locale/easyui-lang-zh_CN.js"></script>  
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath }/res/easyui/themes/default/easyui.css"/>  
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath }/res/easyui/themes/icon.css"/>   

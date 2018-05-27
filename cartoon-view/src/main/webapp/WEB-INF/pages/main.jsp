@@ -26,7 +26,8 @@
 			//	console.log(node.text);  // 在用户点击的时候提示
 				if(node.text.match(/(\.jpg$|\.png$)/i))
 					window.open('${pageContext.request.contextPath }/image/jumpToImgView?fileName='+encodeURIComponent(node.id),"_blank",null,false);
-				
+				else if(node.text.match(/(\.mp4$|\.mkv$|\.avi$|\.wmv$)/i))
+					window.open('${pageContext.request.contextPath }/video/jumpToVideoView?fileName='+encodeURIComponent(node.id),"_blank",null,false);
 		    }
 		});  
 	</script>

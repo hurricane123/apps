@@ -86,7 +86,7 @@ public class ImageController {
 	@RequestMapping(value="viewDirect")
 	public void viewDirect(@RequestParam String url,HttpServletResponse response) throws Exception {
 		String filePath = baseDir + "/" + url;
-		logger.trace("当前请求的的图片路径为："+filePath);
+		logger.trace("当前请求的图片路径为："+filePath);
 		File file = new File(filePath);
 		if (file.exists()&&file.isFile()) {
 			InputStream inputStream = new FileInputStream(file);

@@ -23,4 +23,9 @@ public class IndexController {
 	public String viewCartoon() {
 		return "main";
 	}
+	
+	@RequestMapping("video")
+	public String viewVideo() {
+		return "video";
+	}
 }

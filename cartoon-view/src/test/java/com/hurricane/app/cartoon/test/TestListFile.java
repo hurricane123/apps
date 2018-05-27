@@ -45,8 +45,8 @@ public class TestListFile {
 		}
 		Collections.sort(fileNameList);
 		fileNameList.add(fileNameList.indexOf(fileName)+"");
-		logger.info("获取到的索引位置为："+fileNameList.get(fileNameList.size()-2));
-		logger.info("获取到的索引位置为："+fileNameList.get(fileNameList.size()-1));
+//		logger.info("获取到的索引位置为："+fileNameList.get(fileNameList.size()-2));
+//		logger.info("获取到的索引位置为："+fileNameList.get(fileNameList.size()-1));
 		logger.info("获取到的文件总数为："+fileNameList.size()+"");
 	}
 	@Test
